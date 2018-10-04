@@ -1,0 +1,28 @@
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danncortes/vanilla-js-webpack-starter-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danncortes/vanilla-js-webpack-starter-project/issues"
+  },
+  "homepage": "https://github.com/danncortes/vanilla-js-webpack-starter-project#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "babel-loader": "^8.0.4",
+    "lodash": "^4.17.11",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
+  }
+}
