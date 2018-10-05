@@ -1,7 +1,18 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
+
+function plugins(argv){
+  const plugs = [];
+
+  if(argv.mode === 'production'){
+    plugs.push(new OptimizeCSSAssetsPlugin({}))
+  }
+
+  return plugs;
+}
 
 module.exports = (env, argv) => ({
   entry: { bundle: './src/index.js' },
@@ -29,6 +40,7 @@ module.exports = (env, argv) => ({
             loader: MiniCssExtractPlugin.loader,
             options: {
               publicPath: '../',
+              minimize: true
             },
           },
           'css-loader',
@@ -47,5 +59,6 @@ module.exports = (env, argv) => ({
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
+    ...plugins(argv)
   ],
 });
