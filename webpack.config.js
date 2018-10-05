@@ -5,13 +5,12 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
 
 function plugins(argv){
-  const plugs = [];
-
   if(argv.mode === 'production'){
-    plugs.push(new OptimizeCSSAssetsPlugin({}))
+    return [
+      new OptimizeCSSAssetsPlugin({}),
+    ]
   }
-
-  return plugs;
+  return [];
 }
 
 module.exports = (env, argv) => ({
