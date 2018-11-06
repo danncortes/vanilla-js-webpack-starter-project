@@ -13,13 +13,14 @@ function plugins(argv) {
   return [];
 }
 
+
 module.exports = (env, argv) => ({
   entry: { bundle: './src/index.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   devServer: {
     open: true,
   },
@@ -33,7 +34,7 @@ module.exports = (env, argv) => ({
         },
       },
       {
-        test: /\.css$/,
+        test: /\.(scss|css)$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -43,20 +44,32 @@ module.exports = (env, argv) => ({
             },
           },
           'css-loader',
+          'sass-loader',
         ],
       },
     ],
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: false,
+        },
+      },
+    },
+  },
   plugins: [
     new CleanWebpackPlugin('dist'),
-    new HtmlWebpackPlugin(),
     new HtmlWebpackPlugin({ // Also generate a test.html
       filename: 'index.html',
       template: './src/index.html',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
-      chunkFilename: '[id].css',
+      chunkFilename: '[name].css',
     }),
     ...plugins(argv),
   ],
