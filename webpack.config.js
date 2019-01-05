@@ -1,23 +1,23 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const path = require('path');
 
 function plugins(argv) {
-  if (argv.mode === "production") {
+  if (argv.mode === 'production') {
     return [new OptimizeCSSAssetsPlugin({})];
   }
   return [];
 }
 
 module.exports = (env, argv) => ({
-  entry: { bundle: "./src/index.js" },
+  entry: { bundle: './src/index.js' },
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "[name].js"
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
   },
-  devtool: "eval-source-map",
+  devtool: 'eval-source-map',
   devServer: {
     open: true
   },
@@ -27,7 +27,7 @@ module.exports = (env, argv) => ({
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         }
       },
       {
@@ -36,12 +36,12 @@ module.exports = (env, argv) => ({
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "../",
+              publicPath: '../',
               minimize: true
             }
           },
-          "css-loader",
-          "sass-loader"
+          'css-loader',
+          'sass-loader'
         ]
       }
     ]
@@ -50,24 +50,24 @@ module.exports = (env, argv) => ({
     splitChunks: {
       cacheGroups: {
         styles: {
-          name: "styles",
+          name: 'styles',
           test: /\.css$/,
-          chunks: "all",
+          chunks: 'all',
           enforce: false
         }
       }
     }
   },
   plugins: [
-    new CleanWebpackPlugin("dist"),
+    new CleanWebpackPlugin('dist'),
     new HtmlWebpackPlugin({
       // Also generate a test.html
-      filename: "index.html",
-      template: "./src/index.html"
+      filename: 'index.html',
+      template: './src/index.html'
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[name].css"
+      filename: '[name].css',
+      chunkFilename: '[name].css'
     }),
     ...plugins(argv)
   ]
