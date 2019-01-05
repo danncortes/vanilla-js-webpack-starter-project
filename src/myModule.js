@@ -1,3 +1,3 @@
 export default function myModule() {
-  console.log("My module");
+  console.log('My module');
 }
