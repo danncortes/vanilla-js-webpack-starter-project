@@ -9,7 +9,7 @@
     "test": "jest --watchAll",
     "prettier": "prettier --write \"**/*.+(js|jsx|json|css|scss)\"",
     "lint": "eslint --fix \"**/*.+(js)\"",
-    "precommit": "npm run prettier && npm run lint"
+    "precommit": "npm run prettier && npm run lint && git add ."
   },
   "repository": {
     "type": "git",
